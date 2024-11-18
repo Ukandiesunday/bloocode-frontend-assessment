@@ -4,7 +4,7 @@ export interface MovieType {
   overview: string;
   release_date: string;
   vote_average: number;
-  genres: { name: string }[];
+  genre_ids: { name: string }[];
   id: number;
 }
 

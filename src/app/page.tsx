@@ -15,8 +15,8 @@ const Home = () => {
   const TMDB_KEY = process.env.NEXT_PUBLIC_TMDB_KEY;
   const endpoint = `${BASE_URL}/popular?api_key=${TMDB_KEY}`;
   useEffect(() => {
-    setLoading(true);
     const fetchMovies = async () => {
+      setLoading(true);
       try {
         const response = await getData(endpoint);
         if (response) {
@@ -44,7 +44,9 @@ const Home = () => {
   }
   return (
     <div className="p-4">
-      <h1 className="text-3xl font-bold mb-4">Popular Movies</h1>
+      <h1 className="text-3xl font-bold mb-4 text-center text-[40px]">
+        Welcome Popular Movie Tv
+      </h1>
       <input
         type="text"
         placeholder="Search movies..."

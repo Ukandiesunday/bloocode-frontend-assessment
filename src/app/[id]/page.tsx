@@ -39,10 +39,10 @@ const SingleMovie = () => {
   const movie: any = movies.find((item: MovieType) => item.id === movieId);
   console.log(movie?.poster_path);
   return (
-    <div>
-      Single page
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div>
+    <div className="p-[20px] lg:p-[50px]">
+      <h1 className="text-center mb-3 text-[40px]">Explore Movie details</h1>
+      <div className="flex justify-center w-full md:max-w-[1024px] mx-auto ">
+        <div className="flex flex-col  border border-[rgb(179,177,177)] rounded-sm">
           <Image
             width={400}
             height={500}
@@ -51,10 +51,17 @@ const SingleMovie = () => {
             alt={movie?.title}
             className="w-full h-64 object-cover rounded"
           />
-          <h2 className="text-lg font-semibold mt-2">{movie?.title}</h2>
-          <p>Release Date: {movie?.release_date}</p>
-          <p className="mt-3">Rating: {movie?.vote_average}</p>
-          <p>{movie?.overview}</p>
+          <div className="flex flex-col gap-4 mt-3 p-5">
+            <h2 className="text-lg font-semibold ">{movie?.title}</h2>
+            <p>Release Date: {movie?.release_date}</p>
+            <p className="">Rating: {movie?.vote_average}</p>
+            <p>{movie?.overview}</p>
+            {movie.genre_ids.map((genre: number) => (
+              <ul className="flex flex-col gap-4 mt-4">
+                <li>Genre: {genre}</li>
+              </ul>
+            ))}
+          </div>
         </div>
       </div>
     </div>
