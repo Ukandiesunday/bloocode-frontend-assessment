@@ -6,7 +6,7 @@ import React from "react";
 
 const MovieCard = ({ movie }: any) => {
   return (
-    <div className="flex flex-col gap-3 cursor-pointer">
+    <article className="flex flex-col gap-3 cursor-pointer">
       <Image
         width={400}
         height={500}
@@ -18,7 +18,7 @@ const MovieCard = ({ movie }: any) => {
       <h2 className="text-lg font-semibold mt-2">{movie.title}</h2>
       <p>Release Date: {movie.release_date}</p>
       <p>Rating: {movie.vote_average}</p>
-    </div>
+    </article>
   );
 };
 
