@@ -10,8 +10,8 @@ const FavoritePage = () => {
   const { favorites, removeFavorite } = useFavorites();
 
   return (
-    <div className="mt-[20px] p-[20px] md:p-[50px]">
-      <div className="flex gap-[50px] text-[30px] md:gap-[100px] justify-center items-center mb-8 md:text-[50px]">
+    <div className="mt-[20px] max-w-[1200px] mx-auto p-[20px] md:p-[50px]">
+      <div className="flex items-center gap-[50px] text-[30px] md:gap-[100px]  mb-8 md:text-[50px]">
         <Link href={"/"}>
           {" "}
           <FaArrowLeftLong className="justify-start " />
@@ -25,14 +25,14 @@ const FavoritePage = () => {
           No Favorite Movies Added yet.....
         </h2>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-[30px]">
           {favorites.map((movie) => (
             <div key={movie.id} className="">
-              <div>
+              <div className="w-full">
                 <MovieCard movie={movie} key={movie.id} />
 
                 <button
-                  className="text-red-500 text-[20px] font-bold"
+                  className="text-red-500 text-[20px] font-bold mt-2"
                   onClick={() => removeFavorite(movie.id)}
                 >
                   Remove Favorite

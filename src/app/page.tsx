@@ -41,22 +41,22 @@ const Home = () => {
       search === "" || movie.title.toLowerCase().includes(search.toLowerCase());
     return matchSearch;
   });
-  console.log(loading);
+
   if (loading) {
     return <Loader loading={loading} />;
   }
   return (
     <div className="p-[20px] md:p-[40px]">
-      <h1 className="text-3xl font-bold mb-4 mt-4 text-center text-[25px] md:text-[40px]">
-        Welcome To Popular Movie Tv
+      <h1 className="text-3xl font-bold mb-7 mt-4 text-center text-[25px] md:text-[40px]">
+        Explore Popular Movies
       </h1>
 
       <input
         type="text"
-        placeholder="Search movies..."
+        placeholder="Search popular movies..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="w-full p-2 mb-4 border rounded-[7px] outline-[#ee46ee] h-[50px] text-[18px]"
+        className="w-full p-2 mb-7 border rounded-[7px] outline-[#ee46ee] h-[50px] text-[18px]"
       />
 
       <div>
@@ -65,28 +65,28 @@ const Home = () => {
             Search Result not found
           </h1>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[30px]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-[30px]">
             {filteredMovies.map((movie) => (
               <div key={movie.id}>
                 <Link href={`/${movie.id}`}>
                   <MovieCard movie={movie} />
                 </Link>
-                <div className="flex gap-3 mt-3">
+                <div className="flex gap-3 mt-3 pr-4">
                   <button
-                    className="text-green-500 text-[18px] font-bold"
+                    className="text-green-500 text-[13px] text-nowrap font-bold"
                     onClick={() => addFavorite(movie)}
                   >
                     Add Favorite
                   </button>
                   <button
-                    className="text-red-500 text-[18px] font-bold"
+                    className="text-red-500 text-[13px] text-nowrap font-bold"
                     onClick={() => removeFavorite(movie.id)}
                   >
                     Remove Favorite
                   </button>
 
                   <Link
-                    className=" text-[18px] font-bold ml-4"
+                    className="  font-bold  text-[13px] text-nowrap"
                     href={"/favorite"}
                   >
                     See favorite

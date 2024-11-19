@@ -4,6 +4,8 @@ import "./globals.css";
 import { FavoriteProvider } from "../context/FavoriteContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,11 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Navbar />
         <FavoriteProvider>
           <ToastContainer />
 
           {children}
         </FavoriteProvider>
+        <Footer />
       </body>
     </html>
   );
