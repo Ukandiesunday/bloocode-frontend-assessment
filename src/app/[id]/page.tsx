@@ -5,13 +5,14 @@ import { useParams } from "next/navigation";
 import { MovieType } from "../../types";
 import { getData } from "../../apiServices/request";
 import Image from "next/image";
+import { FaArrowLeft } from "react-icons/fa6";
 
-import { FaArrowLeftLong } from "react-icons/fa6";
 import Link from "next/link";
+import Loader from "@/components/Loader";
 const SingleMovie = () => {
   const [movies, setMovies] = useState<MovieType[]>([]);
-  const [search, setSearch] = useState("");
-  const [loading, setLoading] = useState(false);
+
+  const [loading, setLoading] = useState(true);
 
   const { id } = useParams();
 
@@ -36,19 +37,21 @@ const SingleMovie = () => {
     };
     fetchMovies();
     setLoading(false);
-  }, []);
+  }, [endpoint]);
 
   const movie: any = movies.find((item: MovieType) => item.id === movieId);
-
+  if (loading) {
+    return <Loader loading={loading} />;
+  }
   return (
     <div className="p-[20px] lg:p-[50px]">
       <div className="flex gap-[50px] text-[30px] md:gap-[100px] justify-center items-center mb-8 md:text-[50px]">
         <Link href={"/"}>
           {" "}
-          <FaArrowLeftLong className="justify-start " />
+          <FaArrowLeft className="justify-start " />
         </Link>
 
-        <h1 className="">Explore Movie details</h1>
+        <h1 className="capitalize">Explore Movie Details</h1>
       </div>
 
       <div className="flex justify-center w-full md:max-w-[1024px] mx-auto ">

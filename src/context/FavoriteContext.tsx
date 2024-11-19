@@ -29,9 +29,7 @@ export const FavoriteProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [favorites, setFavorite] = useState<MovieType[]>(
-    JSON.parse(localStorage.getItem("favorite") || "[]")
-  );
+  const [favorites, setFavorite] = useState<MovieType[]>([]);
 
   console.log(favorites, "stored favorites");
   // Load favorites from localStorage on mount

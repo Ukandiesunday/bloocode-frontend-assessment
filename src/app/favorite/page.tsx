@@ -4,17 +4,17 @@ import React, { useEffect } from "react";
 import { useFavorites } from "../../context/FavoriteContext";
 import MovieCard from "@/components/MovieCard";
 import Link from "next/link";
-import { FaArrowLeftLong } from "react-icons/fa6";
+import { FaArrowLeft, FaArrowLeftLong } from "react-icons/fa6";
 
 const FavoritePage = () => {
   const { favorites, removeFavorite } = useFavorites();
 
   return (
     <div className="mt-[20px] max-w-[1200px] mx-auto p-[20px] md:p-[50px]">
-      <div className="flex items-center gap-[50px] text-[30px] md:gap-[100px]  mb-8 md:text-[50px]">
+      <div className="flex items-center gap-[50px] text-[30px] md:gap-[70px]  mb-8 md:text-[50px]">
         <Link href={"/"}>
           {" "}
-          <FaArrowLeftLong className="justify-start " />
+          <FaArrowLeft className="justify-start " />
         </Link>
 
         <h1 className="">Explore Your Favorite Movies</h1>

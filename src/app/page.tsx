@@ -33,7 +33,7 @@ const Home = () => {
     };
     fetchMovies();
     setLoading(false);
-  }, []);
+  }, [endpoint]);
 
   // Filter by search
   const filteredMovies = movies.filter((movie) => {

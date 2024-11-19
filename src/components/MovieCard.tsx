@@ -6,7 +6,7 @@ import React from "react";
 
 const MovieCard = ({ movie }: any) => {
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 cursor-pointer">
       <Image
         width={400}
         height={500}
