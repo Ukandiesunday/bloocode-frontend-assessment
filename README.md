@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Movie Library Application - README
 
-## Getting Started
+# Project Overview
 
-First, run the development server:
+This is a responsive and dynamic Movie Library assessment Application built using Next.js, TypeScript, and Tailwind CSS. The application fetches popular movie data from The Movie Database (TMDb) API and provides features such as viewing popular movies, searching for movies, detailed movie pages, and managing a list of favorite movies.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# How to Set Up and Run the Application
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Clone the Repository
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Clone the project from the repository to your local machine
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+git clone <https://github.com/Ukandiesunday/bloocode-frontend-assessment.git>
+cd bloocode-assessment
 
-## Learn More
+### Install Dependencies
 
-To learn more about Next.js, take a look at the following resources:
+Install all the required packages:
+npm install
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Set Up Environment Variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Create a .env.local file in the root directory.
+Add the TMDb API key and BASE_URL to the file:
+.env
 
-## Deploy on Vercel
+NEXT_PUBLIC_TMDB_KEY=248cf12f3ae959fc22c1703ea53caa66
+NEXT_PUBLIC_BASEURL=https://api.themoviedb.org/3/movie
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Run the Application
+Start the development server:npm run dev
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The app will run on http://localhost:3000.
+
+# Design Choices
+
+Framework: Next.js
+
+Reason: Next.js offers server-side rendering (SSR) and static site generation (SSG), which improve the application's performance and SEO. The built-in routing system simplifies the management of pages like the homepage, movie details page, and favorites page.
+
+## Styling: Tailwind CSS
+
+Reason: Tailwind CSS enables rapid development of responsive and consistent designs. It helps me easily customize breakpoints and styling rules without writing custom CSS.
+
+## TypeScript
+
+Reason: TypeScript ensures type safety and improves the developer experience by preventing runtime type errors. Custom types used like MovieType and FavoritesContextType ensure robust data handling throughout the app.
+
+## State Management: React Context API
+
+Reason: The Context API provides a simple and effective way to manage global state (e.g., favorites list) without too much prob drilling, preventing rerendering.
+
+## LocalStorage
+
+Reason: Used for persisting user favorites to ensure the state remains intact across page reloads.
+
+## API: The Movie Database (TMDb)
+
+Reason: TMDb for the API
+
+## Key Features
+
+Homepage: Displays popular movies with search functionality.
+Movie Details Page: Shows detailed information for each movie.
+Favorites: Allows users to add and manage their favorite movies, with data persistence using LocalStorage.
+Responsive Design: Optimized for mobile, tablet, and desktop.
