@@ -31,7 +31,10 @@ const FavoritePage = () => {
               <div>
                 <MovieCard movie={movie} key={movie.id} />
 
-                <button onClick={() => removeFavorite(movie.id)}>
+                <button
+                  className="text-red-500 text-[20px] font-bold"
+                  onClick={() => removeFavorite(movie.id)}
+                >
                   Remove Favorite
                 </button>
               </div>

@@ -2,6 +2,7 @@
 
 import { MovieType } from "@/types";
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 interface FavoritesContextType {
   favorites: MovieType[];
@@ -39,7 +40,6 @@ export const FavoriteProvider = ({
       localStorage.getItem("favorites") || "[]"
     );
     setFavorite(storedFavorites);
-    console.log(storedFavorites, "local favorites");
   }, []);
 
   // Add a movie to favorites
@@ -48,7 +48,7 @@ export const FavoriteProvider = ({
       const updatedFavorites = [...favorites, movie];
       setFavorite(updatedFavorites);
       localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-      console.log(movie);
+      toast.success("Movie added to favorite list");
     }
   };
 
@@ -57,6 +57,7 @@ export const FavoriteProvider = ({
     const updatedFavorites = favorites.filter((fav) => fav.id !== id);
     setFavorite(updatedFavorites);
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+    toast.success("Movie removed from list");
   };
 
   return (

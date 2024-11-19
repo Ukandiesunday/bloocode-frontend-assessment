@@ -7,6 +7,7 @@ import Image from "next/image";
 import { getData } from "../apiServices/request";
 import { useFavorites } from "../context/FavoriteContext";
 import MovieCard from "@/components/MovieCard";
+import Loader from "@/components/Loader";
 
 const Home = () => {
   const [movies, setMovies] = useState<MovieType[]>([]);
@@ -42,7 +43,7 @@ const Home = () => {
   });
   console.log(loading);
   if (loading) {
-    return <h1>loading......</h1>;
+    return <Loader loading={loading} />;
   }
   return (
     <div className="p-[20px] md:p-[40px]">
@@ -71,14 +72,25 @@ const Home = () => {
                   <MovieCard movie={movie} />
                 </Link>
                 <div className="flex gap-3 mt-3">
-                  <button onClick={() => addFavorite(movie)}>
+                  <button
+                    className="text-green-500 text-[18px] font-bold"
+                    onClick={() => addFavorite(movie)}
+                  >
                     Add Favorite
                   </button>
-                  <button onClick={() => removeFavorite(movie.id)}>
+                  <button
+                    className="text-red-500 text-[18px] font-bold"
+                    onClick={() => removeFavorite(movie.id)}
+                  >
                     Remove Favorite
                   </button>
 
-                  <Link href={"/favorite"}>See favorite</Link>
+                  <Link
+                    className=" text-[18px] font-bold ml-4"
+                    href={"/favorite"}
+                  >
+                    See favorite
+                  </Link>
                 </div>
               </div>
             ))}
