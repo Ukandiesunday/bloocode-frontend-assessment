@@ -2,10 +2,12 @@
 
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { MovieType } from "../types";
-import { getData } from "../apiServices/request";
+import { MovieType } from "../../types";
+import { getData } from "../../apiServices/request";
 import Image from "next/image";
 
+import { FaArrowLeftLong } from "react-icons/fa6";
+import Link from "next/link";
 const SingleMovie = () => {
   const [movies, setMovies] = useState<MovieType[]>([]);
   const [search, setSearch] = useState("");
@@ -37,18 +39,26 @@ const SingleMovie = () => {
   }, []);
 
   const movie: any = movies.find((item: MovieType) => item.id === movieId);
-  console.log(movie?.poster_path);
+
   return (
     <div className="p-[20px] lg:p-[50px]">
-      <h1 className="text-center mb-3 text-[40px]">Explore Movie details</h1>
+      <div className="flex gap-[50px] text-[30px] md:gap-[100px] justify-center items-center mb-8 md:text-[50px]">
+        <Link href={"/"}>
+          {" "}
+          <FaArrowLeftLong className="justify-start " />
+        </Link>
+
+        <h1 className="">Explore Movie details</h1>
+      </div>
+
       <div className="flex justify-center w-full md:max-w-[1024px] mx-auto ">
         <div className="flex flex-col  border border-[rgb(179,177,177)] rounded-sm">
           <Image
             width={400}
             height={500}
+            alt={movie?.title || "movie title"}
             priority
             src={`https://image.tmdb.org/t/p/w500/${movie?.poster_path}`}
-            alt={movie?.title}
             className="w-full h-64 object-cover rounded"
           />
           <div className="flex flex-col gap-4 mt-3 p-5">
@@ -56,8 +66,8 @@ const SingleMovie = () => {
             <p>Release Date: {movie?.release_date}</p>
             <p className="">Rating: {movie?.vote_average}</p>
             <p>{movie?.overview}</p>
-            {movie.genre_ids.map((genre: number) => (
-              <ul className="flex flex-col gap-4 mt-4">
+            {movie?.genre_ids?.map((genre: number, ind: number) => (
+              <ul key={ind} className="flex flex-col gap-4 mt-4">
                 <li>Genre: {genre}</li>
               </ul>
             ))}

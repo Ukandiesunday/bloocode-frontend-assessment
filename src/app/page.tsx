@@ -2,14 +2,17 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { MovieType } from "./types";
+import { MovieType } from "../types";
 import Image from "next/image";
-import { getData } from "./apiServices/request";
+import { getData } from "../apiServices/request";
+import { useFavorites } from "../context/FavoriteContext";
+import MovieCard from "@/components/MovieCard";
 
 const Home = () => {
   const [movies, setMovies] = useState<MovieType[]>([]);
   const [search, setSearch] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const { addFavorite, removeFavorite } = useFavorites();
 
   const BASE_URL = process.env.NEXT_PUBLIC_BASEURL;
   const TMDB_KEY = process.env.NEXT_PUBLIC_TMDB_KEY;
@@ -20,7 +23,6 @@ const Home = () => {
       try {
         const response = await getData(endpoint);
         if (response) {
-          console.log(response.data);
           setMovies(response.data);
         }
       } catch (error) {
@@ -38,43 +40,47 @@ const Home = () => {
       search === "" || movie.title.toLowerCase().includes(search.toLowerCase());
     return matchSearch;
   });
-
+  console.log(loading);
   if (loading) {
     return <h1>loading......</h1>;
   }
   return (
-    <div className="p-4">
-      <h1 className="text-3xl font-bold mb-4 text-center text-[40px]">
-        Welcome Popular Movie Tv
+    <div className="p-[20px] md:p-[40px]">
+      <h1 className="text-3xl font-bold mb-4 mt-4 text-center text-[25px] md:text-[40px]">
+        Welcome To Popular Movie Tv
       </h1>
+
       <input
         type="text"
         placeholder="Search movies..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="w-full p-2 mb-4 border rounded"
+        className="w-full p-2 mb-4 border rounded-[7px] outline-[#ee46ee] h-[50px] text-[18px]"
       />
+
       <div>
         {filteredMovies.length === 0 ? (
           <h1 className="flex justify-center text-[40px]">
             Search Result not found
           </h1>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[30px]">
             {filteredMovies.map((movie) => (
-              <Link key={movie.id} href={`/${movie.id}`}>
-                <Image
-                  width={400}
-                  height={500}
-                  priority
-                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                  alt={movie.title}
-                  className="w-full h-64 object-cover rounded"
-                />
-                <h2 className="text-lg font-semibold mt-2">{movie.title}</h2>
-                <p>Release Date: {movie.release_date}</p>
-                <p>Rating: {movie.vote_average}</p>
-              </Link>
+              <div key={movie.id}>
+                <Link href={`/${movie.id}`}>
+                  <MovieCard movie={movie} />
+                </Link>
+                <div className="flex gap-3 mt-3">
+                  <button onClick={() => addFavorite(movie)}>
+                    Add Favorite
+                  </button>
+                  <button onClick={() => removeFavorite(movie.id)}>
+                    Remove Favorite
+                  </button>
+
+                  <Link href={"/favorite"}>See favorite</Link>
+                </div>
+              </div>
             ))}
           </div>
         )}
